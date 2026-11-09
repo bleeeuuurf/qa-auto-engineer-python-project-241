@@ -22,9 +22,13 @@ git clone https://github.com/bleeeuuurf/qa-auto-engineer-python-project-241.git
 cd qa-auto-engineer-python-project-241
 ```
 
-## Использование
+## Использование только с json
 
 [![asciicast](https://asciinema.org/a/m2nOYaqDT0Xs9Ua2.svg)](https://asciinema.org/a/m2nOYaqDT0Xs9Ua2)
+
+## Использование с примером работы пакета для yaml файлов
+
+[![asciicast](https://asciinema.org/a/GeMbw92UH008IboQ.svg)](https://asciinema.org/a/GeMbw92UH008IboQ)
 
 ---
 

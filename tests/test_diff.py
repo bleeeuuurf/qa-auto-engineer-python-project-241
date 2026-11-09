@@ -82,3 +82,21 @@ def test_diff_with_bool(tmp_path):
     )
 
     assert generate_diff(file1, file2) == expected
+
+
+def test_diff_with_yaml():
+    file1 = "tests/test_data/file1.yml"
+    file2 = "tests/test_data/file2.yml"
+
+    expected = (
+        "{\n"
+        "  - follow: false\n"
+        "    host: hexlet.io\n"
+        "  - proxy: 123.234.53.22\n"
+        "  - timeout: 50\n"
+        "  + timeout: 20\n"
+        "  + verbose: true\n"
+        "}"
+    )
+
+    assert generate_diff(file1, file2) == expected

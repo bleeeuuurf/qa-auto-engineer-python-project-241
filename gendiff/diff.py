@@ -1,25 +1,32 @@
-import argparse
-
-from gendiff import generate_diff
+from gendiff.parser import parse_json
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        prog='gendiff',
-        description='Compare two files'
-    )
-    parser.add_argument('first_file')
-    parser.add_argument('second_file')
-    parser.add_argument(
-        '-f', '--format',
-        default='stylish',
-        help='set format of output'
-    )
+def format_value(value):
+    if isinstance(value, bool):
+        return str(value).lower()
 
-    args = parser.parse_args()
-
-    print(generate_diff(args.first_file, args.second_file))
+    return str(value)
 
 
-if __name__ == '__main__':
-    main()
+def generate_diff(file_path1, file_path2):
+    data1 = parse_json(file_path1)
+    data2 = parse_json(file_path2)
+
+    keys = sorted(set(data1) | set(data2))
+    lines = []
+
+    for key in keys:
+        if key in data1 and key in data2:
+            if data1[key] == data2[key]:
+                lines.append(f"    {key}: {format_value(data1[key])}")
+            else:
+                lines.extend((
+                    f"  - {key}: {format_value(data1[key])}",
+                    f"  + {key}: {format_value(data2[key])}",
+                ))
+        elif key in data1:
+            lines.append(f"  - {key}: {format_value(data1[key])}")
+        else:
+            lines.append(f"  + {key}: {format_value(data2[key])}")
+
+    return "{\n" + "\n".join(lines) + "\n}"

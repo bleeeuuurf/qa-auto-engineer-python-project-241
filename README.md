@@ -4,7 +4,6 @@
 
 [![Python CI](https://github.com/bleeeuuurf/qa-auto-engineer-python-project-241/actions/workflows/pyci.yml/badge.svg)](https://github.com/bleeeuuurf/qa-auto-engineer-python-project-241/actions/workflows/pyci.yml)
 
-
 Консольная утилита, которая сравнивает два плоских файла JSON или YAML и выводит разницу в трёх форматах. Проект стоит в профессии тестировщика, поэтому основная работа идёт над тестами. Вы пишете их на pytest, сверяете вывод утилиты с эталонными файлами и задаёте порог покрытия, при просадке которого падает сборка в GitHub Actions.
 
 Учебный проект Хекслета: https://ru.hexlet.io/programs/qa-auto-engineer-python

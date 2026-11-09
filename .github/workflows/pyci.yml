@@ -2,15 +2,25 @@ name: Python CI
 
 on:
   push:
+    branches:
+      - main
   pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 15
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,13 +31,15 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Install dependencies
-        run: uv sync
+        run: make install
 
-      - name: Run linter
-        run: make lint
+      - name: Run checks
+        run: |
+          make lint
+          make test
 
-      - name: Run tests
-        run: make test
-
-      - name: Run tests with coverage
-        run: make test-coverage
+      # Порог покрытия задан в pyproject.toml ([tool.coverage.report] fail_under),
+      # поэтому шаг падает при просадке покрытия, и бейджик CI отражает в том числе его
+      - name: Run test coverage
+        run: |
+          make test-coverage

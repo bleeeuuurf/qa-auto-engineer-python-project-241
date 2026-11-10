@@ -169,3 +169,33 @@ def test_plain_format_with_null(tmp_path):
     expected = "Property 'age' was added with value: null"
 
     assert generate_diff(file1, file2, "plain") == expected
+
+
+def test_diff_with_json(tmp_path):
+    data1 = {
+        "name": "vika",
+        "age": 25,
+        "active_user": True,
+    }
+    data2 = {
+        "name": "masha",
+        "age": 25,
+        "city": "Moscow",
+    }
+
+    file1 = tmp_path / "file1.json"
+    file2 = tmp_path / "file2.json"
+
+    file1.write_text(json.dumps(data1))
+    file2.write_text(json.dumps(data2))
+
+    expected = [
+        ["added", "city", "Moscow"],
+        ["removed", "active_user", True],
+        ["unchanged", "age", 25],
+        ["updated", "name", ["vika", "masha"]],
+    ]
+
+    result = generate_diff(file1, file2, "json")
+
+    assert json.loads(result) == expected

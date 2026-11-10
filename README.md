@@ -34,6 +34,11 @@ cd qa-auto-engineer-python-project-241
 ### Использование с примером plain
 
 [![asciicast](https://asciinema.org/a/z6N4DhYhA1En4pmD.svg)](https://asciinema.org/a/z6N4DhYhA1En4pmD)
+
+
+### Использование с примеро json файлов
+
+[![asciicast](https://asciinema.org/a/N5pdD1TCVaGaarjA.svg)](https://asciinema.org/a/N5pdD1TCVaGaarjA)
 ---
 
 <details>

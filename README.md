@@ -30,6 +30,10 @@ cd qa-auto-engineer-python-project-241
 
 [![asciicast](https://asciinema.org/a/GeMbw92UH008IboQ.svg)](https://asciinema.org/a/GeMbw92UH008IboQ)
 
+
+### Использование с примером plain
+
+[![asciicast](https://asciinema.org/a/z6N4DhYhA1En4pmD.svg)](https://asciinema.org/a/z6N4DhYhA1En4pmD)
 ---
 
 <details>

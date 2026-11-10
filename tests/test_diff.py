@@ -100,3 +100,72 @@ def test_diff_with_yaml():
     )
 
     assert generate_diff(file1, file2) == expected
+
+
+def test_diff_with_plain_format(tmp_path):
+    data1 = {
+        "follow": False,
+        "host": "hexlet.io",
+        "proxy": "123.234.53.22",
+        "timeout": 50,
+    }
+    data2 = {
+        "host": "hexlet.io",
+        "timeout": 20,
+        "verbose": True,
+    }
+
+    file1 = tmp_path / "file1.json"
+    file2 = tmp_path / "file2.json"
+
+    file1.write_text(json.dumps(data1))
+    file2.write_text(json.dumps(data2))
+
+    expected = (
+        "Property 'follow' was removed\n"
+        "Property 'proxy' was removed\n"
+        "Property 'timeout' was updated. From 50 to 20\n"
+        "Property 'verbose' was added with value: true"
+    )
+
+    assert generate_diff(file1, file2, "plain") == expected
+
+
+def test_plain_format_with_null_and_string(tmp_path):
+    data1 = {
+        "name": "vika",
+        "nothing": None,
+    }
+    data2 = {
+        "name": "masha",
+        "active": True,
+    }
+
+    file1 = tmp_path / "file1.json"
+    file2 = tmp_path / "file2.json"
+
+    file1.write_text(json.dumps(data1))
+    file2.write_text(json.dumps(data2))
+
+    expected = (
+        "Property 'active' was added with value: true\n"
+        "Property 'name' was updated. From 'vika' to 'masha'\n"
+        "Property 'nothing' was removed"
+    )
+
+    assert generate_diff(file1, file2, "plain") == expected
+
+
+def test_plain_format_with_null(tmp_path):
+    data1 = {"name": "vika"}
+    data2 = {"name": "vika", "age": None}
+
+    file1 = tmp_path / "file1.json"
+    file2 = tmp_path / "file2.json"
+
+    file1.write_text(json.dumps(data1))
+    file2.write_text(json.dumps(data2))
+
+    expected = "Property 'age' was added with value: null"
+
+    assert generate_diff(file1, file2, "plain") == expected

@@ -1,3 +1,4 @@
+from gendiff.formatters.plain import format_plain
 from gendiff.formatters.stylish import format_stylish
 from gendiff.parser import parse_data
 
@@ -11,10 +12,7 @@ def build_diff(data1, data2):
             if data1[key] == data2[key]:
                 diff.append(("unchanged", key, data1[key]))
             else:
-                diff.extend((
-                    ("removed", key, data1[key]),
-                    ("added", key, data2[key]),
-                ))
+                diff.append(("updated", key, (data1[key], data2[key])))
         elif key in data1:
             diff.append(("removed", key, data1[key]))
         else:
@@ -31,5 +29,8 @@ def generate_diff(file_path1, file_path2, format_name="stylish"):
 
     if format_name == "stylish":
         return format_stylish(diff)
+
+    if format_name == "plain":
+        return format_plain(diff)
 
     raise ValueError(f"not usablr format: {format_name}")

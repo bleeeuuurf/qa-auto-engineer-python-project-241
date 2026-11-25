@@ -51,3 +51,7 @@ cd qa-auto-engineer-python-project-241
 ## О Хекслете
 
 [Хекслет](https://ru.hexlet.io/) — школа программирования: авторские программы обучения с практикой, поддержкой наставников и реальными проектами, которые остаются в резюме. Этот репозиторий — один из таких проектов.
+
+### Hexlet tests and linter status:
+[![Actions Status](https://github.com/bleeeuuurf/qa-auto-engineer-python-project-241/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/bleeeuuurf/qa-auto-engineer-python-project-241/actions)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bleeeuuurf_qa-auto-engineer-python-project-241&metric=alert_status)](https://sonarcloud.io/dashboard?id=bleeeuuurf_qa-auto-engineer-python-project-241)

@@ -200,6 +200,7 @@ def test_diff_with_json(tmp_path):
 
     assert json.loads(result) == expected
 
+
 def test_diff_with_null_in_stylish(tmp_path):
     data1 = {"name": "vika"}
     data2 = {"name": "vika", "value": None}

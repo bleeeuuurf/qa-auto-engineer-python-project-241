@@ -42,6 +42,7 @@ testpaths = ["tests"]
 [tool.coverage.run]
 branch = true
 source = ["gendiff"]
+relative_files = true
 
 [tool.coverage.report]
 fail_under = 80

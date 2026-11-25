@@ -199,3 +199,22 @@ def test_diff_with_json(tmp_path):
     result = generate_diff(file1, file2, "json")
 
     assert json.loads(result) == expected
+
+def test_diff_with_null_in_stylish(tmp_path):
+    data1 = {"name": "vika"}
+    data2 = {"name": "vika", "value": None}
+
+    file1 = tmp_path / "file1.json"
+    file2 = tmp_path / "file2.json"
+
+    file1.write_text(json.dumps(data1))
+    file2.write_text(json.dumps(data2))
+
+    expected = (
+        "{\n"
+        "    name: vika\n"
+        "  + value: null\n"
+        "}"
+    )
+
+    assert generate_diff(file1, file2) == expected
